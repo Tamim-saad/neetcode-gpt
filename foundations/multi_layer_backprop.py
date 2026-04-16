@@ -40,13 +40,12 @@ class Solution:
         loss = np.mean(np.square(y_hat - y_true))
         dz2 = (2 / n) * (z2 - y_true)
 
-        dW2 = np.outer(dz2, a1)
-        # z2 = W2*a1 + b2 => dW2 = dz2 * a1.T
+        dW2 = np.outer(dz2, a1)  # z2 = W2 @ a1 + b2  =>  dW2 = dz2 @ a1^T (outer product)
         db2 = dz2
 
-        da1 = np.dot(np.transpose(w2), dz2)  # z2 = W2*a1 + b2 => da1 = w2.T * dz2
+        da1 = np.dot(np.transpose(w2), dz2)  # z2 = W2 @ a1 + b2  =>  da1 = W2.T @ dz2
         dz1 = da1 * (z1 > 0)  # a1 = Relu(z1) => dz1 = da1 * Relu'(z1) [Relu'(z1) = 0/1]
-        dW1 = np.outer(dz1, x)  # z1 = W1*x + b1 => dW1 = dz1 * x.T
+        dW1 = np.outer(dz1, x)  # z1 = W1 @ x + b1  =>  dW1 = dz1 @ x^T (outer product)
         db1 = dz1
 
         return {
