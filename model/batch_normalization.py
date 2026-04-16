@@ -29,4 +29,4 @@ class Solution:
           
         y = gamma * x_hat + beta
           
-        return np.round(y, 4), np.round(running_mean, 4), np.round(running_var, 4)
+        return (np.round(y, 4).tolist(), np.round(running_mean, 4).tolist(), np.round(running_var, 4).tolist())
